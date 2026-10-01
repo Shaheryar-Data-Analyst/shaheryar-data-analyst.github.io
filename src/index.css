@@ -1,11 +1,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap');
 @import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   background-color: #000;
+}
+
+#work {
+  overflow-x: clip;
 }
 
 .site-controls {
@@ -39,6 +48,26 @@ html, body {
   border-color: #d4af37;
   color: #fff5eb;
   outline: none;
+}
+
+@media (max-width: 1023px) {
+  .site-controls {
+    position: absolute;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1.5rem, env(safe-area-inset-right));
+    bottom: auto;
+  }
+
+  .site-controls button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 [data-theme='light'] {

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { useSitePreferences } from './SitePreferences';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 const arabicCapabilityTitles = ['هندسة الواجهات', 'الخدمات الخلفية الموزعة', 'منصات البيانات', 'الخوارزميات وتعلم الآلة', 'أدوات التسليم والسحابة'];
 const arabicCapabilityDescriptions = [
@@ -53,7 +54,7 @@ export const SkillsSection: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative w-screen bg-black text-[#E8DFD8] font-sans selection:bg-[#cbb59d] selection:text-black pt-8 pb-24 px-6 sm:px-12 lg:px-20 overflow-hidden flex flex-col justify-center"
+      className="relative w-full bg-black text-[#E8DFD8] font-sans selection:bg-[#cbb59d] selection:text-black pt-8 pb-24 px-6 sm:px-12 lg:px-20 overflow-hidden flex flex-col justify-center"
     >
       {/* Ambient Glows */}
       <div className="absolute top-1/3 left-1/4 w-[34rem] h-[34rem] bg-[#D4AF37]/5 rounded-full blur-[170px] pointer-events-none" />
@@ -105,16 +106,16 @@ export const SkillsSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6"
         >
+          <ScrollStack mobileOnly className="skills-stack">
           {bentoCategories.map((block, idx) => (
+            <ScrollStackItem key={block.title} itemClassName={`${block.colSpan} min-w-0 h-full`}>
             <motion.div
-              key={block.title}
               variants={cardVariants}
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               whileHover={{ y: -5, transition: { duration: 0.25 } }}
-              className={`${block.colSpan} relative p-8 sm:p-9 rounded-sm border border-[#8C6D4F]/35 bg-[#100D0B]/85 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#D4AF37]/80 hover:shadow-[0_16px_45px_rgba(212,175,55,0.14)] cursor-pointer group`}
+              className="relative h-full p-8 sm:p-9 rounded-sm border border-[#8C6D4F]/35 bg-[#100D0B] overflow-hidden transition-colors duration-500 hover:border-[#D4AF37]/80 hover:shadow-[0_16px_45px_rgba(212,175,55,0.14)] cursor-pointer group"
             >
               {/* Top Subtle Border Highlight */}
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -162,7 +163,9 @@ export const SkillsSection: React.FC = () => {
                 ))}
               </div>
             </motion.div>
+            </ScrollStackItem>
           ))}
+          </ScrollStack>
         </motion.div>
 
       </div>

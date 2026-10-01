@@ -119,7 +119,7 @@ export function CredentialsSection() {
           </div>
         </div>
 
-        <div className="mx-auto mt-5 w-full max-w-4xl sm:w-[82%]">
+        <div className="mt-5 w-full">
           <TravelMap isArabic={isArabic} />
         </div>
 

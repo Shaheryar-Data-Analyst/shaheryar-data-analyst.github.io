@@ -7,8 +7,8 @@
 .scroll-stack-inner {
   position: relative;
   width: 100%;
-  padding-top: 4vh;
-  padding-bottom: 50vh; /* creates the runway so all cards stack and lock at the top */
+  padding-top: clamp(1.5rem, 4vh, 3rem);
+  padding-bottom: 50vh;
 }
 
 .scroll-stack-card {
@@ -16,14 +16,60 @@
   width: 100%;
   box-sizing: border-box;
   transform-origin: top center;
-  will-change: transform, filter;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .scroll-stack-end {
   width: 100%;
   height: 1px;
+}
+
+@media (min-width: 1024px) {
+  .skills-stack[data-stack-mode='static'] .scroll-stack-inner {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .repository-stack[data-stack-mode='static'] .scroll-stack-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.scroll-stack-scroller[data-stack-mode='static'] .scroll-stack-inner,
+.scroll-stack-scroller[data-stack-mode='mobile'] .scroll-stack-inner {
+  display: grid;
+  gap: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.scroll-stack-scroller[data-stack-mode='static'] .scroll-stack-card {
+  margin-bottom: 0 !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+
+.scroll-stack-scroller[data-stack-mode='static'] .scroll-stack-end,
+.scroll-stack-scroller[data-stack-mode='mobile'] .scroll-stack-end {
+  display: none;
+}
+
+@media (max-width: 1023px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .scroll-stack-inner {
+    display: grid;
+    gap: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .scroll-stack-card {
+    margin-bottom: 0 !important;
+    will-change: auto !important;
+  }
+
+  .scroll-stack-end {
+    display: none;
+  }
 }

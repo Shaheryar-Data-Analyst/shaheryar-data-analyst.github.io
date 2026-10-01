@@ -36,10 +36,63 @@
   background: linear-gradient(90deg, black 0%, rgb(0 0 0 / 85%) 27%, transparent 51%);
 }
 
+.hero-mobile-nav {
+  width: calc(100% + 3rem);
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  margin-inline: -1.5rem;
+  padding-inline: 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  border-block: 1px solid rgb(140 109 79 / 26%);
+  background: rgb(4 3 2 / 82%);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 24%);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-mobile-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-mobile-nav a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  color: #c4b5a5;
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 180ms ease;
+  scroll-snap-align: start;
+}
+
+.hero-mobile-nav a:hover,
+.hero-mobile-nav a:focus-visible {
+  color: #fff5eb;
+  outline: none;
+}
+
+.hero-mobile-nav a:focus-visible {
+  box-shadow: inset 0 -2px #d4af37;
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-media--portrait { left: 72%; }
   .hero-main > :first-child { max-width: 28rem; }
   .hero-main h1 { font-size: clamp(4.7rem, 9.5vw, 6rem); }
+}
+
+@media (max-width: 1023px) {
+  .hero-header > div:first-child {
+    min-height: 3.25rem;
+  }
 }
 
 @media (max-width: 767px) {
@@ -49,7 +102,7 @@
   }
 
   .hero-scene {
-    top: 3.75rem;
+    top: 8.25rem;
     bottom: auto;
     height: min(74svh, 640px);
   }
@@ -74,5 +127,24 @@
     align-items: flex-start;
     margin-top: min(71svh, 610px);
     margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 439px) {
+  .hero-mobile-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    overflow-x: clip;
+    scroll-snap-type: none;
+  }
+
+  .hero-mobile-nav a {
+    justify-content: center;
+    scroll-snap-align: none;
+  }
+
+  .hero-scene {
+    top: 11rem;
   }
 }

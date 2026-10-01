@@ -1,3 +1,5 @@
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
+
 export interface RepositoryEntry {
   name: string;
   title: string;
@@ -41,11 +43,11 @@ export const RepositoryCollection = ({ repositories, email, isArabic = false }: 
       </a>
     </div>
 
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+    <ScrollStack mobileOnly className="repository-stack">
       {repositories.map((repository) => (
+        <ScrollStackItem key={repository.name} itemClassName="h-full min-w-0">
         <article
-          key={repository.name}
-          className="flex min-w-0 flex-col rounded-xl border border-[#8C6D4F]/35 bg-[#0E0C0A] p-6 transition-colors hover:border-[#D4AF37]/65 sm:p-7"
+          className="flex h-full min-w-0 flex-col rounded-xl border border-[#8C6D4F]/35 bg-[#0E0C0A] p-6 transition-colors hover:border-[#D4AF37]/65 sm:p-7"
         >
           <span className="mb-5 self-start rounded-sm border border-[#8C6D4F]/35 bg-[#16120E] px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.15em] text-[#D4AF37]">
             {repository.status}
@@ -72,8 +74,9 @@ export const RepositoryCollection = ({ repositories, email, isArabic = false }: 
             </a>
           </div>
         </article>
+        </ScrollStackItem>
       ))}
-    </div>
+    </ScrollStack>
   </section>
 );
 

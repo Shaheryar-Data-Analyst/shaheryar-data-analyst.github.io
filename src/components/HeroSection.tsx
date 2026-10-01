@@ -33,17 +33,17 @@ const fadeUpVariants: Variants = {
 
 const navItems = [
   { name: 'ABOUT', arabic: 'نبذة', href: '#about' },
-  { name: 'PROJECTS', arabic: 'المشاريع', href: '#work' },
+  { name: 'WORK', arabic: 'المشاريع', href: '#work' },
   { name: 'SKILLS', arabic: 'المهارات', href: '#skills' },
   { name: 'EXPERIENCE', arabic: 'الخبرة', href: '#experience' },
-  { name: 'CREDENTIALS', arabic: 'المؤهلات', href: '#education' },
+  { name: 'EDUCATION', arabic: 'المؤهلات', href: '#education' },
   { name: 'CONTACT', arabic: 'تواصل', href: '#contact' },
 ];
 
 export const HeroSection: React.FC = () => {
   const { isArabic } = useSitePreferences();
   return (
-    <section className="hero-section relative w-full overflow-hidden bg-black text-[#E8DFD8] font-sans selection:bg-[#cbb59d] selection:text-black">
+    <section id="top" className="hero-section relative w-full overflow-hidden bg-black text-[#E8DFD8] font-sans selection:bg-[#cbb59d] selection:text-black">
       {/* The personal portrait is the temporary hero until the new video is ready. */}
       <div className="hero-scene pointer-events-none bg-black">
         {portfolio.heroMedia.video ? (
@@ -105,43 +105,59 @@ export const HeroSection: React.FC = () => {
       <div className="hero-content relative z-10 flex flex-col justify-between h-full w-full px-6 sm:px-12 lg:px-16 pt-6 pb-8 pointer-events-none">
         
         {/* Navigation Bar */}
-        <header className="relative flex items-center justify-between w-full pointer-events-auto">
-          <a
-            href="#"
-            className="text-xs sm:text-sm font-semibold tracking-[0.35em] uppercase text-[#EAD8C7] hover:opacity-75 transition-opacity"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
-            {portfolio.shortName.toUpperCase()}.
-          </a>
+        <header className="hero-header relative w-full pointer-events-auto">
+          <div className="flex items-center justify-between w-full">
+            <a
+              href="#top"
+              className="text-xs sm:text-sm font-semibold tracking-[0.35em] uppercase text-[#EAD8C7] hover:opacity-75 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D4AF37]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              {portfolio.shortName.toUpperCase()}.
+            </a>
 
-          {/* Navigation Links */}
+            {/* Desktop Navigation Links */}
+            <nav
+              aria-label={isArabic ? 'أقسام الموقع' : 'Portfolio sections'}
+              className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-[10px] xl:text-[11px] tracking-[0.22em] xl:tracking-[0.28em] font-light uppercase text-[#C4B5A5] absolute left-1/2 -translate-x-1/2"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="relative group py-2 transition-colors duration-300 hover:text-[#FFF5EB] focus-visible:text-[#FFF5EB] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D4AF37]"
+                >
+                  {isArabic ? item.arabic : item.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#D4AF37]/50 transition-all duration-300 group-hover:w-full" />
+                </a>
+              ))}
+            </nav>
+
+            {/* Right Action */}
+            <a
+              href="#contact"
+              className="group hidden lg:flex items-center space-x-2 text-[11px] tracking-[0.24em] font-light uppercase py-2 px-4 border border-[#8C6D4F]/50 hover:border-[#D4AF37] text-[#EAD8C7] transition-all duration-300 backdrop-blur-sm ml-auto md:ml-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D4AF37]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              <span>{isArabic ? 'لنتحدث' : 'LET\'S TALK'}</span>
+              <span className="transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">
+                ↗
+              </span>
+            </a>
+          </div>
+
+          {/* Phone and Tablet Navigation */}
           <nav
-            className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-[10px] xl:text-[11px] tracking-[0.22em] xl:tracking-[0.28em] font-light uppercase text-[#C4B5A5] absolute left-1/2 -translate-x-1/2"
+            aria-label={isArabic ? 'أقسام الموقع' : 'Portfolio sections'}
+            className="hero-mobile-nav flex lg:hidden"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="relative group py-1 transition-colors duration-300 hover:text-[#FFF5EB]"
-              >
+              <a key={item.name} href={item.href}>
                 {isArabic ? item.arabic : item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#D4AF37]/50 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
-
-          {/* Right Action */}
-          <a
-            href="#contact"
-            className="group flex items-center space-x-2 text-[11px] tracking-[0.24em] font-light uppercase py-2 px-4 border border-[#8C6D4F]/50 hover:border-[#D4AF37] text-[#EAD8C7] transition-all duration-300 backdrop-blur-sm ml-auto md:ml-0"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
-            <span>{isArabic ? 'لنتحدث' : 'LET\'S TALK'}</span>
-            <span className="transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">
-              ↗
-            </span>
-          </a>
         </header>
 
         {/* Main Hero Row */}
